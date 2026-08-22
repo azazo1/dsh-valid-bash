@@ -1,0 +1,5 @@
+# dsh-valid-bash bundle patch: mount the host plugin under its package
+# name, resolved through the profile's node_modules.
+- insert:
+    - id: dsh-valid-bash
+      name: dsh-valid-bash
