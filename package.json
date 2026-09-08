@@ -1,12 +1,17 @@
 {
   "name": "dsh-valid-bash",
   "version": "0.1.0",
-  "description": "放宽 dsh 沙箱提权参数校验: 同模式提权请求直接放行, 空 justification 也允许.",
+  "description": "放宽 dsh 沙箱提权参数校验: 同模式提权请求直接放行, 空 justification 也允许, 并让 Web 卡片可展开.",
   "type": "module",
   "main": "./lib/index.js",
   "exports": {
     ".": "./lib/index.js",
+    "./client": "./lib/client.js",
     "./package.json": "./package.json"
+  },
+  "scripts": {
+    "check": "node --check lib/index.js && node --check lib/sanitize.js && node --check lib/client.js",
+    "test": "node --test test/*.test.js"
   },
   "files": [
     "lib",
@@ -16,6 +21,9 @@
   "dsh": {
     "bundle": {
       "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web"
     }
   },
   "keywords": [
