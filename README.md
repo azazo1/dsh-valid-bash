@@ -1,6 +1,6 @@
 # dsh-valid-bash
 
-放宽 dsh 沙箱提权参数校验的插件, 作用于 bash, pwsh, write, edit 工具. 同时修正 Web 对话里这些工具卡片因非法提权字段而无法展开的问题.
+放宽 dsh 沙箱提权参数校验的插件, 作用于 bash, pwsh, write, edit 工具. 同时软化这些工具描述里 "必须先尝试再提权" 的说法, 并修正 Web 对话里这些工具卡片因非法提权字段而无法展开的问题.
 
 ## 解决的问题
 
@@ -20,6 +20,7 @@ Web 卡片还有第三层问题: `ui-tool` 的 `validEscalationFields` 用同样
 - 空 `justification` 不再被拒: 合法升级场景自动补默认说明, 无需升级场景直接剥离参数.
 - 合法升级审批不被绕过: 例如 `read-only` 请求 `workspace-write` 仍走正常用户审批流程.
 - 沙箱模式无法解析时剥离提权参数, 保证调用继续执行.
+- 在 `system-prompt/assemble` 阶段软化上述工具的提权描述: 不确定时仍建议先试, 已经知道需要更宽权限时允许第一次就带 `sandbox_permissions`.
 - Web Client 在渲染前剥离非法提权配对, 让上述工具卡片可以展开. 不改会话日志原文, 历史会话同样生效.
 
 ## 安装
@@ -34,7 +35,7 @@ dsh plugin --profile web add azazo1/dsh-valid-bash
 
 ## 使用
 
-插件挂载后自动生效, 无需额外配置.
+插件挂载后自动生效, 无需额外配置. 描述改写发生在 `system-prompt/assemble`, 只影响模型下一轮看到的工具表; Inspect 的 `Tool.listTools` 读的仍是注册表原文.
 
 ## License
 

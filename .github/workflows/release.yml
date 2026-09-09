@@ -99,6 +99,7 @@ jobs:
           set -euo pipefail
           node --check lib/index.js
           node --check lib/sanitize.js
+          node --check lib/rewrite-description.js
           node --check lib/client.js
           test -s lib/index.js
           test -s lib/client.js
