@@ -6,6 +6,7 @@ default:
 # 检查插件入口语法.
 check:
     node --check lib/index.js
+    node --check lib/inject-prompt.js
     node --check lib/sanitize.js
     node --check lib/client.js
 
