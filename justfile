@@ -7,7 +7,6 @@ default:
 check:
     node --check lib/index.js
     node --check lib/sanitize.js
-    node --check lib/rewrite-description.js
     node --check lib/client.js
 
 # 运行单元测试.
